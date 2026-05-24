@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お天気 & 服装アドバイス</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>お天気 & 服装</h1>
+      <p>都市を選ぶと、今の天気とおすすめの服装を表示します</p>
+    </header>
+
+    <section class="control-panel" aria-label="都市の選択">
+      <label for="city-select">都市を選択</label>
+      <select id="city-select" aria-label="都市"></select>
+      <p class="api-hint">
+        初回利用時は <code>app.js</code> 先頭の <code>API_KEY</code> に
+        <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">OpenWeatherMap</a>
+        の無料APIキーを設定してください。
+      </p>
+    </section>
+
+    <div id="loading" class="loading" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p>天気を取得しています…</p>
+    </div>
+
+    <div id="error" class="error" role="alert" hidden></div>
+
+    <article id="weather-card" class="weather-card" hidden>
+      <div class="weather-main">
+        <p id="city-name"></p>
+        <div class="weather-visual">
+          <span id="weather-icon" aria-hidden="true"></span>
+        </div>
+        <p id="weather-desc"></p>
+        <div class="temp-block">
+          <span id="temperature" aria-label="現在の気温"></span><span class="temp-unit">℃</span>
+        </div>
+      </div>
+
+      <section class="outfit-section" aria-label="服装の提案">
+        <h2>おすすめの服装</h2>
+        <div class="outfit-content">
+          <span id="outfit-icon" aria-hidden="true"></span>
+          <p id="outfit-text"></p>
+        </div>
+        <p id="umbrella-warning" class="umbrella-warning" hidden>
+          【持ち物】傘が必要です！☔
+        </p>
+      </section>
+    </article>
+
+    <footer class="footer">
+      データ提供: OpenWeatherMap
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
