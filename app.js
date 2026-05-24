@@ -2,7 +2,7 @@
 // OpenWeatherMap API キー（https://openweathermap.org/api で無料取得）
 // 取得したキーを下の引用符の中に貼り付けてください。
 // ============================================================
-const API_KEY = '4f7cd685c4b13cca5ee2bff13d791e67';
+const API_KEY = '5d68e0844dff3b6644d77f2ae21ae1a0';
 
 const CITIES = [
   { label: '東京', query: 'Tokyo,JP' },
@@ -152,7 +152,7 @@ function hideError() {
 
 async function fetchWeather(cityQuery) {
   if (!API_KEY || API_KEY === 'ここにキーを貼る') {
-    throw new Error('app.js の先頭で API_KEY に OpenWeatherMap のキーを設定してください。');
+    throw new Error('fetch_failed');
   }
 
   const url = new URL('https://api.openweathermap.org/data/2.5/weather');
@@ -162,13 +162,7 @@ async function fetchWeather(cityQuery) {
 
   const res = await fetch(url);
   if (!res.ok) {
-    if (res.status === 401) {
-      throw new Error('APIキーが無効です。OpenWeatherMapでキーを確認してください。');
-    }
-    if (res.status === 404) {
-      throw new Error('都市が見つかりませんでした。');
-    }
-    throw new Error(`天気データの取得に失敗しました（${res.status}）`);
+    throw new Error('fetch_failed');
   }
   return res.json();
 }
@@ -206,8 +200,8 @@ async function onCityChange() {
   try {
     const data = await fetchWeather(query);
     renderWeather(data, label);
-  } catch (err) {
-    showError(err.message || 'エラーが発生しました。');
+  } catch {
+    showError('天気を取得できませんでした。しばらくしてからもう一度お試しください。');
   } finally {
     showLoading(false);
   }

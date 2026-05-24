@@ -103,20 +103,6 @@ body[data-weather='Snow'] .weather-card {
   outline: none;
 }
 
-.api-hint {
-  margin-top: 0.75rem;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.api-hint code {
-  background: #f1f5f9;
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  font-size: 0.85em;
-}
-
 .loading,
 .error {
   text-align: center;
